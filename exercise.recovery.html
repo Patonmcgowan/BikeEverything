@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--
+  exercise.recovery.html
+
+  The main application file for the exercise and ride analysis
+  -->
+
+<!----------------------------------------------------------------------------
+  Revision History
+  ~~~~~~~~~~~~~~~~
+  08 July 2024 MDS Original
+
+  ---------------------------------------------------------------------------->
+
+  <title>Ride Analysis</title>
+
+  <link rel="stylesheet" href="css/exercise.recovery.css">
+
+  <script type="text/javascript" src="lib/cubic.js"></script>              <!-- Library to colve cubics using Cardano's formula                                             -->
+  <script type="text/javascript" src="lib/BikeClass.js"></script>          <!-- Provides bike models for power and force - used to be called bikeModel.js                   -->
+  <script type="text/javascript" src="lib/RiderClass.js"></script>         <!-- Provides rider info and models for cardiac and lactate                                      -->
+  <script type="text/javascript" src="src/eventListeners.js"></script>    <!-- Provides all of the event listeners (since there are a lot we keep them in a separate file) -->
+
+  <script type="text/javascript" src="data/stravaData.js"></script>       <!-- Some data to play with                                                                      -->
+
+  <script type="text/javascript" src="src/generalFunctions.js"></script>  <!-- Provides the main routines and logic to tie everything together                             -->
+  <script type="text/javascript" src="src/gpxTcxUtils.js"></script>      <!-- Utilities to import and manipulate Strava and Garmin .GPX and .TCX files                    -->
+
+</head>
+
+<body>
+  <div class="content-container" id="importFrame">
+    <h2>File Import and Parser</h2>
+    <p>This utility accepts .GPX (GPS Exchange Format) and .TCX (Garmin Training Centre) XML files.  Note that the two file types may yield slightly different results because of the way that distances are handled</p>
+    <p>Exporting files for another user from an app such as Strava will yield limited information - these files cannot be further analysed because time, heart rate and speed data are required and are not available in the files imported for another user.  Once a ride has been imported, a summary of the ride will appear at the bottom of the page</p>
+    <input type="file" style="display:none" id="gpxtcxInput" accept=".gpx, .tcx">
+    <button id="btnImportGPXTCX">Import a new Garmin or Strava File .GPX, .TCX</button>
+
+<p>ToDo: Import Cadence and Power (these are in different spots in .tcx and .gpx file).  Analyse them if we import them.  Analyse fit of power to heart rate formula vs empirical data.</p>
+
+    <h2>Bike and Rider Selection</h2>
+    <p>Select the rider and bike for analysis of this ride.  As a rider and bike are selected in the left hand column, their summary details will appear at the bottom of the page</p>
+
+    <select id = "riderSelection">
+      <option value="" disabled selected hidden>Select a rider</option>
+      <option value="mike">Mike</option>
+      <option value="don">Don</option>
+    </select>
+    <br />
+    <select id = "bikeSelection">
+      <option value="" disabled selected hidden>Select a bike</option>
+      <option value="baumCorretto">Mike's Baum</option>
+      <option value="scottSpeedster">Mike's Scott</option>
+      <option value="trekDomane">Mike's Trek e-bike</option>
+      <option value="trekDomaneRaw">Mike's Trek e-bike (no e-assist used)</option>
+      <option value="donTrekDomane">Don's Trek e-bike</option>
+    </select>
+
+  </div>  
+
+  <div class="content-container" id="analyserFrame">
+    <p>Once a ride has been imported, a rider selected and a bike selected, the first two buttons below will be enabled to allow additional analysis.  The third button (to validate the heart rate vs power curve against the theoretical model) will only be enabled if a self powered (non electric) bike is selected.</p>
+    
+    <button id="btnAnalyse" disabled>Analyse The Imported Ride</button>
+    <button id="btnWhatIf" disabled>Analyse The Imported Ride With Another Bike</button>
+    <button id="btnValidate" disabled>Validate The Heart Rate vs Power Curve</button>
+    
+    <p>ToDo: Validate heart rate vs power curve against BikeClass power calcs (but only if a non e-bike ride) </p>
+  </div>
+
+  <div class="chart-container" id="modelFrame">
+    <canvas id="modelChartCanvas"></canvas>
+  </div>
+
+  <div class="sticky-bottom"><span id="parseResult"></span><span id="riderInfo"></span><span id="bikeInfo"></span></div>  
+
+</body>
+</html>
+
+<!----------------------------------------------------------------------------
+                               End of file
+  ---------------------------------------------------------------------------->

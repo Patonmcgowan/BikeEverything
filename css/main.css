@@ -1,0 +1,331 @@
+/*
+  main.css
+
+  ------------------------------------------------------------------------------
+  Revision History
+  ================
+  22 Mar 2020 MDS Modified from original to suit HTML5 and client based app
+
+
+  ------------------------------------------------------------------------------
+ */
+
+:root {
+  --sideMargin: 15px;
+  --inputText: #063ab5;
+  --inputBackground: #d3e6ff;
+  --outputText: #990033;
+  --outputBackground: #eee0ee;
+  --bgColor: rgba(255, 255, 255, 1);
+}
+
+body {	
+	background-color: var(--bgColour);
+	font-family: Arial, Helvetica, sans-serif;	
+	text-align: "justify"
+	color: #000000;
+	font-size: 13px;
+}
+
+p {	
+	font-style: normal;
+	line-height: normal;
+	margin: 0em;
+	padding: 0em;
+  text-align: "justify";
+  color: #000000;
+  font-weight:bold;
+  font-size: 13px;
+  font-family: arial, verdana, sans-serif;
+}
+
+h1, h2 {	
+	font-size: 1.3em;
+	font-style: normal;
+	font-weight: bold;
+  text-transform: capitalize;
+	line-height: normal;
+	color: #333333;
+	margin-right: 0em;
+	margin-top: 0em;
+  margin-left: var(--sideMargin);
+	padding: 0em;
+  text-align: left;
+}
+
+h1 {
+
+}
+
+h2 {	
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+h3 {	
+	font-size: 1.0em;
+	font-style: normal;
+	font-weight: bold;
+	line-height: normal;
+	color: #333333;
+	margin-right: 0em;
+  margin-left: var(--sideMargin);
+	margin-top: 0.5em;
+	margin-bottom:0em;
+	padding: 0em;
+  text-align: left;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.flex-item {
+  flex: 1;
+}
+
+.flex-row > div > div {
+  height:25px;
+}
+
+.sticky-top {
+  position: fixed;
+  top: 0px;
+  left: 5px;
+	background-color: var(--bgColor); 
+  z-index: 1000;
+  border: 0px;
+  border-radius: 5px;
+  width: 100%;
+  padding-top:2px;
+}
+
+.sticky-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 5px;
+  font-size:12px;
+	background-color: var(--bgColor); 
+  z-index: 1000;
+  border: 0;
+  border-radius: 5px;
+  margin: 0;
+  padding: 2px;
+}
+
+.sticky-bottom .heading {
+  font-weight:bold;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+}
+
+.content {
+  margin-top: 62px;
+}
+
+.flex-row > div > div > input,
+.flex-row > div > div {
+    margin-top: 0px;
+    margin-left: 5px;
+    padding-left: 0px;
+}
+
+.myLink {
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  border-style: none;
+  background-color: #DCDCDC;
+  box-shadow: 2px 2px 5px #888888;
+  color: var(--inputText);
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+}
+
+.myLink:hover {
+  color: white;
+  border-color: white;
+  text-decoration: none;
+}
+
+.myLink:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+table {
+  padding: 0;
+  border-spacing: 0;
+  border-collapse: separate;
+}
+
+.left,
+h4,
+li {
+  margin-left: var(--sideMargin);
+}
+
+.right {
+  margin-right: var(--sideMargin);
+}
+
+button,
+input,
+select {
+  border-radius: 5px;
+  border: 1px;
+  box-shadow: -1px -1px 2px #888888;
+  padding-left: 0px;
+  padding-right: 3px;
+  margin : 5px;
+  text-align: right;
+}
+
+input:not([type='image']):not([type='checkbox']):not(.gearing) {
+  text-align : right;
+  padding-right: 5px; 
+}
+
+div > input {
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.ride-block,
+.input-block {
+  background-color: var(--inputBackground);
+}
+
+#instantaneousOutput,
+.output-block,
+.ride-block  .output,
+.ride-block  .output input:not([type='image']),
+.output-block  input:not([type='button']):not([type='image']) {
+  background-color: var(--outputBackground);
+  color: var(--outputText);
+}
+
+.ride-block .output input:not([type='image']),
+.output-block  input:not([type='image']) {
+  border-style : solid;
+  border-width: 1px;
+  margin-bottom: 2px; /* Aligns two halves of table */
+}
+
+.ride-block table {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left:10px;
+  border-radius: 5px;
+}
+
+#rideinput-block > table {
+  margin: 0;
+  padding: 0;
+}
+
+th {
+  padding-top: 10px;
+}
+
+#aeroOptions,
+#instantaneousOutput > div,
+td {
+	font-weight: bold;
+}
+
+td {
+  text-align: centre;
+}
+
+.gearing {
+  text-align: left;
+  background-color : var(--inputBackground);
+  padding-left: 5px; 
+}
+
+.input-block {
+  color : var(--inputText);
+}
+
+/*
+#instantaneousOutput td:not([class='h1']):not([class='h2']):not([class='h3']):not([class='h4']),
+.ride-block .output td:not([class='h1']):not([class='h2']):not([class='h3']):not([class='h4']),
+.output-block td:not([class='h1']):not([class='h2']):not([class='h3']):not([class='h4']) {
+  color : var(--outputText);
+}
+*/
+
+.output-block {
+  color : var(--outputText);
+}
+
+.flex-item input:not([id='BMIText']),
+.flex-item input {
+  width: 60px;
+}
+
+
+/* Our table headings */
+.h1, .h2, .h3, .h4 {
+  color: black;
+  font-weight:bold;
+}
+
+.h1 {
+  text-align: center;
+}
+
+.h2 {
+  text-align: right;
+  padding-right: 30px;
+}
+
+.h3 {
+  text-align: left;
+}
+
+.h4 {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.section {
+  border: 2px solid #de5602;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: var(--sideMargin);
+  margin-right: var(--sideMargin);
+  padding: 5px;
+}
+
+/*
+//-----------------------------------------------------------------------------
+//                               End of file
+//-----------------------------------------------------------------------------
+*/

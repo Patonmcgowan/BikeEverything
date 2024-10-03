@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- 
+  bikeForcesPower.html
+
+  Webpage to calculate pushbike power, speed and analyse parameters
+
+  -----------------------------------------------------------------------------
+  Revision History
+  ================
+  22 Mar 2020 MDS Original
+
+  -----------------------------------------------------------------------------
+  -->
+<html>
+  <head>
+    <title>Bike Everything</title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <script language=JavaScript src="lib/cubic.js" type=text/javascript></script>
+    <script type="text/javascript" src="lib/BikeClass.js"></script>             <!-- Provides bike models for power and force - used to be called bikeModel.js                   -->
+    <script type="text/javascript" src="lib/RiderClass.js"></script>            <!-- Provides rider info and models                                                              -->
+    <script type="text/javascript" src="lib/RiderWithCardiacClass.js"></script> <!-- Provides the cardiac models for the rider class                                             -->
+    <script type="text/javascript" src="lib/CardiacWithLactateClass.js"></script> <!-- Provides the lactate models for the rider class                                             -->
+    <script language=JavaScript src="src/metabolism.js" type=text/javascript></script> <!-- Provides all stuff to do with Base Metabolism, Resting metabolism BMI, Metabolic equivalent Tasks
+                                                                                    Extends the Cardiac Class so MUST be loaded after that task -->
+  
+    <script type="text/javascript" src="data/stravaData.js"></script>           <!-- Some data to play with                                                                      -->
+    <script type="text/javascript" src="src/generalFunctions.js"></script>      <!-- Provides the main routines and logic to tie everything together                             -->
+    <script type="text/javascript" src="src/gpxTcxUtils.js"></script>           <!-- Utilities to import and manipulate Strava and Garmin .GPX and .TCX files                    -->
+    <script type="text/javascript" src="src/rideCalcs.js"></script>             <!-- Contains the link to the Bike and Rider models from the HTML to perform calcs               -->
+    <script type="text/javascript" src="src/riderBikeData.js"></script>         <!-- Writes the html for the analysis of a STrava or Gamin .GPX file                             -->
+
+    <script type="text/javascript" src="src/makeInputHTML.js"></script>         <!-- Writes the html for the common inputs (bike and rider parameters)                           -->
+    <script type="text/javascript" src="src/makeInstantaneousHTML.js"></script> <!-- Writes the html for the instantaneous speed and power calcs                                 -->
+    <script type="text/javascript" src="src/makeRideHTML.js"></script>          <!-- Writes the html for the inputs and output calc for a ride of up to 20 different stages      -->
+    <script type="text/javascript" src="src/makeRideAnalysisHTML.js"></script>  <!-- Writes the html for the analysis of a Strava or Gamin .GPX file                             -->
+
+    <script type="text/javascript" src="src/eventListeners.js"></script>        <!-- Provides all of the event listeners (since there are a lot we keep them in a separate file) -->
+
+  </head>
+  <body>
+    <div class="left flex-row sticky-top" id="topMenu"></div>                                          <!-- Populated by makeInputHTML.js upon startup         -->
+    <div class= "content">
+      <div id="inputBlock" class="input-block section" align="center" valign="top" width="100%"></div> <!-- Populated by makeInputHTML.js upon startup         -->
+      <div id="instantaneousOutput" class="section"></div>                                             <!-- Populated by makeInstantaneousHTML.js upon startup -->
+      <div id="detailedOutput" class="output-block section" align="center" valign="top"></div>         <!-- Populated by makeInstantaneousHTML.js upon startup -->
+      <div id="rideInputBlock" class="ride-block section" valign="top"></div>                          <!-- Populated by makeRideHTML.js upon startup          -->
+      <div id="rideOutputBlock" class="output-block section"></div>                                    <!-- Populated by makeRideHTML.js upon startup          -->
+      <div id="rideAnalysisBlock" class="output-block section"></div>                                  <!-- Populated by makeRideAnalysisHTML.js upon startup  -->
+    </div> <!-- end of content -->
+
+    <div class="sticky-bottom"><span id="parseResult"></span><span id="riderInfo"><span class='heading'>RIDER</span> Custom </span><span id="bikeInfo"><span class='heading'>BIKE</span> Custom </span></div>  
+
+    <h4>To Do:</h4>
+    <li>Add code to only enable the three analysis buttons when a valid set of ride/rider/bike inputs are selected</li>
+    <li>Write code to model lactate buildup</li>
+    <li>Write code to validate heart rate vs power equation</li>
+    <li>Write code to validate power calculations when power is present in rideData object</li>
+    <li>Add the chart thingy</li>
+
+    <h4>Acknowledgements:</h4>
+    <li>The Javascript code on <a HREF=http://www.kreuzotter.de>Walter Zorn's webpage</a> was used with the kind permission of his family as a base for a lot of the code for the BikeClass object.  All code (as per Walter's request) is bound under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">LGPL Licence</a>.</li>
+    <li><b>"the Science of Speed"</b> by <b>Dr Michael Hanslip</b>, an article in "Bicycling Australia" September-October 2007.
+      the empirical results contained in the article were used to test the bike model implemented on this webpage.
+    </li>
+    <li><b>"Serious Cycling"</b> by <b>Edmund R. Burke, PhD</b> published by Human Kinetics, ISBN:0-87322-759-X.
+      The empirical results contained in the book were used to test the bike model implemented on this webpage.
+    </li>
+    <li><b>"The Cyclists Training Bible"</b> by <b>Joe Friel</b> published by <a href="https://velopress.com/">Velopress</a>, ISBN:1-931382-21-2.
+      The various heartrate testing strategies in this book were used to validate the software models contianed in the code.
+    </li>
+    <li>The <b><a href="https://axs.sram.com/guides/tire/pressure">SRAM Tyre Pressure Guide</a></b> was used to validate and tune the tyre pressure software models.
+    </li>
+    <li><b><a href="https://chatgpt.com/">ChatGPT</a></b> was used to determine starting constants for some of the software models.
+    </li>
+    <li><b>Cardano's formula</b> and analysis courtesy of <a HREF="http://matdworld.wolfram.com/CubicEquation.html">Wolfram Research</a>.</li>
+    <br />
+  </body>
+</html>
+
+<!-----------------------------------------------------------------------------
+//                               End of file
+//---------------------------------------------------------------------------->

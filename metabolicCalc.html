@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<!-- 
+  BMRCalc.html
+
+  Webpage to calculate base metabolism rate, and associated fat burning based 
+  upon age & gender
+
+  -----------------------------------------------------------------------------
+  Revision History
+  ================
+  22 Mar 2020 MDS Original
+  03 Sep 2024 MDS Added Resting Metabolic Rate, body fat
+  -----------------------------------------------------------------------------
+  -->
+<html>
+<head>
+  <title>Metabolic Calculator</title>
+  <META http-equiv=Content-Type content="text/html; charset=windows-1252">
+  <link rel="stylesheet" href="css/main.css">
+  <script language=JavaScript src="src/metabolism.js" type=text/javascript></script>
+  <script language=JavaScript src="src/generalFunctions.js" type=text/javascript></script>
+  <script type="text/javascript">
+    <!-- hide script
+    
+    function calcIt(gender) {
+      let BMR;
+      /* Following is a workaround for the fact that the gender0.checked value is not accurately passed to 
+         the function when called from an event in the radio button input */
+      if (gender==null) {
+        BMR = getBMR(el("gender0").checked, el("weight").value, el("height").value/100, el("age").value); 
+      } else { 
+        BMR = getBMR(gender, el("weight").value, el("height").value/100, el("age").value); 
+      }
+      el("BMRkJ").value = Math.round(BMR);
+      el("BMRCal").value = Math.round(BMR * 0.2390057356);
+      el("BMREquivFat").value=Math.round(BMR * 1000 / 37000);
+
+
+      let RMR;
+      /* Following is a workaround for the fact that the gender0.checked value is not accurately passed to 
+         the function when called from an event in the radio button input */
+      if (gender==null) {
+        RMR = getRMR(el("gender0").checked, el("weight").value, el("height").value/100, el("age").value); 
+      } else { 
+        RMR = getRMR(gender, el("weight").value, el("height").value/100, el("age").value); 
+      }
+      el("RMRkJ").value = Math.round(RMR);
+      el("RMRCal").value = Math.round(RMR * 0.2390057356);
+
+      let RMRMET = el("RMRCal").value / (el("weight").value * 24);
+      el("MET").value = Math.round(1000 * RMRMET) / 1000;
+      el("RMREquivFat").value=Math.round(RMR * 1000 / 37000);
+
+      let bodyFat;
+      if (gender==null) {
+        bodyFat = getBodyFat(el("gender0").checked, el("weight").value, el("height").value / 100, el("age").value); 
+      } else { 
+        bodyFat = getBodyFat(gender, el("weight").value, el("height").value / 100, el("age").value); 
+      }
+      el("bodyFat").value = Math.round(bodyFat * 100);
+
+      const BMI = getBMI(el("weight").value, el("height").value / 100 );
+      el("BMI").value = Math.round(BMI);
+      el("BMIText").value = getBMIText(BMI);
+    }
+    // unhide script -->
+  </script>
+</head>
+
+<body>
+  <div class="input-block section">
+    <div class="flex-row">
+      <div class="flex-item">
+        <div>Height</div>
+        <div>Weight</div>
+        <div>Age</div>
+        <div>Gender</div>
+      </div>
+      <div class="flexTwoThirds">
+        <div><input onchange="calcIt()" maxLength=5 value=187 id="height" size="6">cm</div>
+        <div><input onchange="calcIt()" maxLength=5 value=94.0 id="weight" size="6">kg</div>
+        <div><input onchange="calcIt()" maxLength=5 size=6 value=59 id="age"></div>
+        <div>
+          Male<input type=radio checked onmouseup="calcIt(1)" name="BMRGender" id="gender0">
+          Female<input type=radio onmouseup="calcIt(0)" name="BMRGender" id="gender1">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="output-block section">
+    <div class="flex-row">
+      <div class="flex-item">
+        <div>Approx Basal Metabolic Rate</div>
+        <div></div>
+        <div>... equivalent body fat</div>
+      </div>
+      <div class="flex-item">
+        <div><input size=7 id="BMRkJ" readonly>kJ/day</div>
+        <div><input size=7 id="BMRCal" readonly>cal/day</div>
+        <div><input size=7 id="BMREquivFat" readonly>g/day</div>
+      </div>
+    </div>
+    <div><hr /></div>
+
+    <div class="flex-row">
+      <div class="flex-item">
+        <div>Resting Metabolic Rate</div>
+        <div></div>
+        <div></div>
+        <div>... equivalent body fat</div>
+      </div>
+      <div class="flex-item">
+        <div><input size=7 id="RMRkJ" readonly>kJ/day</div>
+        <div><input size=7 id="RMRCal" readonly>cal/day</div>
+        <div><input size=7 id="MET" readonly>METs</div>
+        <div><input size=7 id="RMREquivFat" readonly>g/day</div>
+      </div>
+    </div>
+    <div><hr /></div>
+
+    <div class="flex-row">
+      <div class="flex-item">
+        <div>Estimated Body Fat</div>
+        <div>Body Mass Index</div>
+      </div>
+      <div class="flex-item">
+        <div><input size=2 id="bodyFat" readonly>%</div>
+        <div><input size=2 id="BMI" readonly></div>
+      </div>
+    </div>
+
+    <input size=40 id="BMIText" style="text-align: center;" readonly>
+  </div>
+
+  <script type="text/javascript">
+    <!-- hide script
+    calcIt();
+    // unhide script -->
+  </script>
+
+</body>
+</html>
+<!-----------------------------------------------------------------------------
+//                               End of file
+//---------------------------------------------------------------------------->

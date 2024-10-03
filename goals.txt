@@ -1,0 +1,7 @@
+The goals of this software are to:
+1) Import a strava or garmin ride and model the lactic acid buildup / clearance based upon the bike and rider
+2) For a given rider and bike, determine the steady state speeds as per Data.xlsx.  Do comparisons of the Baum and Trek, for various personal weights
+3) For a virtual Strava ride (ie from trainer), validate power vs heart rate formula with empirical data
+ do analysis of ride from a specified time to a specified time (so that e-bike functionality can be discounted) ... or discard e-power contribution
+
+Style page / page layout as per bike forces/power app.  Add heart rate training zones, BMI, converters metric/imperial
